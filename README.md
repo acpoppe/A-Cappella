@@ -85,18 +85,16 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[<img src="images/logo.png" alt="Logo" width="80" height="80">](https://allisonpoppe.com)
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`acpoppe`, `A-Cappella`, `alliepoppe`, `allisonpoppe89@gmail.com`, `A Cappella`, `A music bot for Discord!`
+A music bot for Discord!
 
 
 ### Built With
 
-* []()
-* []()
-* []()
+* [Discord.js](https://github.com/discordjs/discord.js/)
+* [ytdl-core](https://github.com/fent/node-ytdl-core)
+* [ytsr](https://github.com/TimeForANinja/node-ytsr)
 
 
 
@@ -172,7 +170,7 @@ Contributions are what make the open source community such an amazing place to l
 <!-- LICENSE -->
 ## License
 
-This application is current UNLICENSED.
+This application is currently UNLICENSED.
 
 
 
@@ -188,9 +186,7 @@ Project Link: [https://github.com/acpoppe/A-Cappella](https://github.com/acpoppe
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* []()
-* []()
-* []()
+* [Yvonne Rieck](https://github.com/kywision)
 
 
 
@@ -209,4 +205,4 @@ Project Link: [https://github.com/acpoppe/A-Cappella](https://github.com/acpoppe
 [license-shield]: https://img.shields.io/github/license/acpoppe/repo.svg?style=for-the-badge
 [license-url]: https://github.com/acpoppe/A-Cappella/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/acpoppe
+[linkedin-url]: https://linkedin.com/in/allison-poppe-2426a7193
