@@ -1,0 +1,9 @@
+{
+    "token": "Production bot token",
+    "devToken": "Dev bot token",
+    "guildIdDev": "Your dev server ID",
+    "guildIdDev2": "Your dev server ID",
+    "clientId": "Your client ID For Production Bot",
+    "clientIdDev": "Your client ID For Dev Bot",
+    "devMode": true
+}
