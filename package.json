@@ -12,7 +12,7 @@
     "bot"
   ],
   "author": "Allison Poppe",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "dependencies": {
     "@discordjs/builders": "^0.6.0",
     "@discordjs/opus": "^0.6.0",
