@@ -23,7 +23,7 @@ module.exports = {
                 embed.addField("\u200B", "\u200B");
             } else {
                 embed.addField("\u200B", "\u200B");
-                embed.addField("NOTHING CURRENTLY PLAYING", "");
+                embed.addField("NOTHING CURRENTLY PLAYING", "\u200B");
                 embed.addField("\u200B", "\u200B");
             }
             let iterator = 1;
