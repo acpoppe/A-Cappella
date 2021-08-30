@@ -76,18 +76,18 @@ module.exports = {
             }
         } else {
             ytplOptions = {limit: Infinity};
-            await interaction.followUp({content: "Starting to add songs from playlist " + playlistResults.title + ".  This may take a minute"})
             const playlistResults = await ytpl(possibleURL, ytplOptions);
             for (let i = 0; i < playlistResults.items.length; i++) {
                 let song = new Song(playlistResults.items[i].shortUrl, interaction.member.id, name);
-                await song.getSongInfo();
-                        
+                song.title = playlistResults.items[i].title;
+                song.length = playlistResults.items[i].durationSec;
+
                 QueueManager.getInstance().addSongToEndOfQueue(song,
                     interaction.guildId,
                     interaction.channel,
                     voiceChannel);
             }
-            return await interaction.followUp({content: "I'm done adding songs from playlist " + playlistResults.title});
+            return await interaction.followUp({content: "Added songs from playlist " + playlistResults.title});
         }
     }
 };

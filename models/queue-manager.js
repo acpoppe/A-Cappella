@@ -1,5 +1,6 @@
 const ServerQueue = require("./server-queue.js");
 const Song = require("./song.js");
+const ytdl = require("ytdl-core");
 
 class PrivateQueueManager {
 
@@ -14,7 +15,7 @@ class PrivateQueueManager {
         // Add song to both regular queue and autoplay queue
         const queue = this.getQueue(serverId, textChannel, voiceChannel);
 
-        queue.addSongToQueue(song);
+        queue.addSongToQueue(song, 0);
 
         // Begin playing
         queue.playNext();
@@ -50,8 +51,15 @@ class PrivateQueueManager {
         queue.currentlyPlayingSong = null;
     }
 
-    addSongToNextInQueue() {
+    addSongToQueueAtIndex(song, index, serverId, textChannel, voiceChannel) {
 
+        // If the music bot isn't in a channel, join the channel
+        this.join(serverId, textChannel, voiceChannel);
+
+        // Add song to both regular queue and autoplay queue
+        const queue = this.getQueue(serverId, textChannel, voiceChannel);
+
+        queue.addSongToQueue(song, index);
     }
 
     setVolume(serverId, textChannel, voiceChannel, volumeAmount) {
@@ -183,6 +191,19 @@ class PrivateQueueManager {
             if (queue.currentlyPlayingSong.autoplayUrl) {
 
                 let song = new Song(queue.currentlyPlayingSong.autoplayUrl,
+                    queue.currentlyPlayingSong.requesterId,
+                    queue.currentlyPlayingSong.requesterName);
+                await song.getSongInfo();
+
+                this.playSong(song,
+                    serverId,
+                    textChannel,
+                    voiceChannel);
+            } else {
+                const songInfo = await ytdl.getInfo(queue.currentlyPlayingSong.url);
+                const autoplayUrl = "https://www.youtube.com/watch?v=" + songInfo.related_videos[0].id;
+
+                let song = new Song(autoplayUrl,
                     queue.currentlyPlayingSong.requesterId,
                     queue.currentlyPlayingSong.requesterName);
                 await song.getSongInfo();

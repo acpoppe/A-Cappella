@@ -30,13 +30,20 @@ class ServerQueue {
     }
 
     addSongToQueue(song, atPosition = -1) {
+        if (this.fairplay) {
+            this.songQueue.sort((a, b) => {
+                return (a.insertIterator > b.insertIterator) ? 1 : -1;
+            });
+        }
         song.insertIterator = this.nextInsertIterator;
         this.nextInsertIterator++;
         if (atPosition < 0 || atPosition > this.songQueue.length - 1) {
             this.songQueue.push(song);
         } else {
-            this.songQueue.splice(atPosition - 1, 0, song);
+            this.songQueue.splice(atPosition, 0, song);
         }
+
+        this.recalculateIterators();
 
         if (this.fairplay) {
             this.sortFairplay();
@@ -45,6 +52,20 @@ class ServerQueue {
         if (this.currentlyPlayingSong === null) {
             this.playNext();
         }
+    }
+
+    recalculateIterators() {
+        if (this.currentlyPlayingSong !== null) {
+            this.currentlyPlayingSong.insertIterator = 0;
+        }
+        let newIterator = 1;
+
+        this.songQueue.forEach((song) => {
+            song.insertIterator = newIterator;
+            newIterator++;
+        });
+
+        this.nextInsertIterator = newIterator;
     }
 
     playNext() {
@@ -149,18 +170,12 @@ class ServerQueue {
 
     shuffle() {
         if (!this.fairplay) {
-            let newIterator = 1;
             for (let i = this.songQueue.length - 1; i > 0; i--) {
                 let j = Math.floor(Math.random() * (i + 1));
                 [this.songQueue[i], this.songQueue[j]] = [this.songQueue[j], this.songQueue[i]];
             }
 
-            this.songQueue.forEach((song) => {
-                song.insertIterator = newIterator;
-                newIterator++;
-            });
-
-            this.nextInsertIterator = newIterator;
+            this.recalculateIterators();
         }
     }
 
@@ -182,8 +197,6 @@ class ServerQueue {
         while (pos <= this.songQueue.length && pos > 0) {
             this.currentlyPlayingSong = this.songQueue.shift();
             pos--;
-            console.log("Currently Playing:\n" + JSON.stringify(this.currentlyPlayingSong));
-            console.log("Queue:\n" + JSON.stringify(this.songQueue));
         }
 
         const audioResourceOptions = {inlineVolume: true};

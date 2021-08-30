@@ -75,7 +75,23 @@ module.exports = {
                 }
             }
         } else {
-            return await interaction.followUp({content: "Playlist ID is valid"});
+            ytplOptions = {limit: Infinity};
+            const playlistResults = await ytpl(possibleURL, ytplOptions);
+            for (let i = 0; i < playlistResults.items.length; i++) {
+                let song = new Song(playlistResults.items[i].shortUrl, interaction.member.id, name);
+                song.title = playlistResults.items[i].title;
+                song.length = playlistResults.items[i].durationSec;
+
+                QueueManager.getInstance().addSongToQueueAtIndex(song,
+                    i,
+                    interaction.guildId,
+                    interaction.channel,
+                    voiceChannel);
+            }
+            QueueManager.getInstance().next(interaction.guildId,
+                interaction.channel,
+                voiceChannel);
+            return await interaction.followUp({content: "Added songs from playlist " + playlistResults.title});
         }
     }
 };
