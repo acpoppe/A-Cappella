@@ -118,7 +118,7 @@ dist
 .pnp.*
 
 
-package-lock.json
+
 config.json
 TODO.txt
 .DS_STORE

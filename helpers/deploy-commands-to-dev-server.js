@@ -1,6 +1,6 @@
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-const { clientId, clientIdDev, guildIdDev, guildIdDev2, token, devToken } = require("../config.json");
+const Config = require("../config.json");
 const fs = require("fs");
 
 const commands = [];
@@ -11,17 +11,23 @@ for (const file of commandFiles) {
     commands.push(command.data.toJSON());
 }
 
+let token = "";
+let clientId = "";
+
+if (!Config.devMode) {
+    token = Config.token;
+    clientId = Config.clientId;
+} else {
+    token = Config.devToken;
+    clientId = Config.devClientId;
+}
+
 const rest = new REST({ version: "9" }).setToken(token);
 
-(async () => {
+async function updateCommands(guildId) {
     try {
         await rest.put(
-            Routes.applicationGuildCommands(clientId, guildIdDev),
-            { body: commands }
-        );
-
-        await rest.put(
-            Routes.applicationGuildCommands(clientId, guildIdDev2),
+            Routes.applicationGuildCommands(clientId, guildId),
             { body: commands }
         );
 
@@ -29,24 +35,8 @@ const rest = new REST({ version: "9" }).setToken(token);
     } catch (error) {
         console.error(error);
     }
-})();
+}
 
-const rest2 = new REST({ version: "9" }).setToken(devToken);
-
-(async () => {
-    try {
-        await rest2.put(
-            Routes.applicationGuildCommands(clientIdDev, guildIdDev),
-            { body: commands }
-        );
-
-        await rest2.put(
-            Routes.applicationGuildCommands(clientIdDev, guildIdDev2),
-            { body: commands }
-        );
-
-        console.log("Successfully registered application commands");
-    } catch (error) {
-        console.error(error);
-    }
-})();
+Config.devGuildIds.forEach((guildId, iterator) => {
+    updateCommands(Config.devGuildIds[iterator]);
+});
