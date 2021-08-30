@@ -38,16 +38,17 @@ module.exports = {
             name = interaction.member.nickname;
         }
 
-        let isPlaylistURL = false;
+        let playlistId = false;
         let possibleURL = interaction.options.getString("input");
         
-        var regExp = /^.*(youtu.be\/|list=)([^#\&\?]*).*/;
+        // var regExp = /^.*(youtu.be\/|list=)([^#\&\?]*).*/;
+        var regExp = /^.*(list=)([^#\&\?]*).*/;
         var match = possibleURL.match(regExp);
         if (match && match[2]){
-            isPlaylistURL = match[2];
+            playlistId = match[2];
         }
 
-        if (!isPlaylistURL) {
+        if (!playlistId) {
             const validURL = await ytdl.validateURL(interaction.options.getString("input"));
             if (validURL) {
                 let song = new Song(interaction.options.getString("input"), interaction.member.id, name);
