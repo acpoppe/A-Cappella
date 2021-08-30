@@ -119,7 +119,7 @@ class PrivateQueueManager {
 
     leave(serverId) {
         if (this.queues.has(serverId)) {
-            this.queues.get(serverId).connection.destroy();
+            this.queues.get(serverId).leave();
             this.queues.delete(serverId);
         }
     }

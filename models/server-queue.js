@@ -22,28 +22,15 @@ class ServerQueue {
     }
 
     joinVoiceChannel() {
+
         this.connection = DiscordVoice.joinVoiceChannel({
             channelId: this.voiceChannel.id,
             guildId: this.voiceChannel.guildId,
             adapterCreator: this.voiceChannel.guild.voiceAdapterCreator
         });
 
-        /*
-        * VOICE CONNECTION EVENT HANDLING
-        */
-        const eventFiles = fs.readdirSync("./events/voiceConnection").filter(file => file.endsWith(".js"));
-
-        for (const file of eventFiles) {
-            const event = require(`../events/voiceConnection/${file}`);
-
-            event.textChannel = this.textChannel;
-            event.voiceChannel = this.voiceChannel;
-
-            if (event.once) {
-                this.connection.once(event.name, (...args) => event.execute(...args));
-            } else {
-                this.connection.on(event.name, (...args) => event.execute(...args));
-            }
+        if (this.connection.listenerCount === 0) {
+            addConnectionListeners();
         }
 
         if (this.player === null) {
@@ -65,6 +52,26 @@ class ServerQueue {
                 } else {
                     this.player.on(event.name, (...args) => event.execute(...args));
                 }
+            }
+        }
+    }
+
+    addConnectionListeners() {
+        /*
+        * VOICE CONNECTION EVENT HANDLING
+        */
+        const eventFiles = fs.readdirSync("./events/voiceConnection").filter(file => file.endsWith(".js"));
+
+        for (const file of eventFiles) {
+            const event = require(`../events/voiceConnection/${file}`);
+
+            event.textChannel = this.textChannel;
+            event.voiceChannel = this.voiceChannel;
+
+            if (event.once) {
+                this.connection.once(event.name, (...args) => event.execute(...args));
+            } else {
+                this.connection.on(event.name, (...args) => event.execute(...args));
             }
         }
     }
