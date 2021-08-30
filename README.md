@@ -202,7 +202,7 @@ Project Link: [https://github.com/acpoppe/A-Cappella](https://github.com/acpoppe
 [stars-url]: https://github.com/acpoppe/A-Cappella/stargazers
 [issues-shield]: https://img.shields.io/github/issues/acpoppe/A-Cappella.svg?style=for-the-badge
 [issues-url]: https://github.com/acpoppe/A-Cappella/issues
-[license-shield]: https://img.shields.io/github/license/acpoppe/A-Cappella.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/badge/Licence-Apache%202.0-blue.svg?style=for-the-badge
 [license-url]: https://github.com/acpoppe/A-Cappella/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/allison-poppe-2426a7193
