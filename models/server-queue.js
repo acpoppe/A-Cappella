@@ -27,6 +27,46 @@ class ServerQueue {
             guildId: this.voiceChannel.guildId,
             adapterCreator: this.voiceChannel.guild.voiceAdapterCreator
         });
+
+        /*
+        * VOICE CONNECTION EVENT HANDLING
+        */
+        const eventFiles = fs.readdirSync("./events/voiceConnection").filter(file => file.endsWith(".js"));
+
+        for (const file of eventFiles) {
+            const event = require(`../events/voiceConnection/${file}`);
+
+            event.textChannel = this.textChannel;
+            event.voiceChannel = this.voiceChannel;
+
+            if (event.once) {
+                this.connection.once(event.name, (...args) => event.execute(...args));
+            } else {
+                this.connection.on(event.name, (...args) => event.execute(...args));
+            }
+        }
+
+        if (this.player === null) {
+            this.player = DiscordVoice.createAudioPlayer();
+
+            /*
+            * PLAYER EVENT HANDLING
+            */
+            const eventFiles = fs.readdirSync("./events/voice").filter(file => file.endsWith(".js"));
+
+            for (const file of eventFiles) {
+                const event = require(`../events/voice/${file}`);
+
+                event.textChannel = this.textChannel;
+                event.voiceChannel = this.voiceChannel;
+
+                if (event.once) {
+                    this.player.once(event.name, (...args) => event.execute(...args));
+                } else {
+                    this.player.on(event.name, (...args) => event.execute(...args));
+                }
+            }
+        }
     }
 
     addSongToQueue(song, atPosition = -1) {
@@ -71,28 +111,6 @@ class ServerQueue {
     playNext() {
         if (this.songQueue.length > 0) {
             this.currentlyPlayingSong = this.songQueue.shift();
-        }
-
-        if (this.player === null) {
-            this.player = DiscordVoice.createAudioPlayer();
-
-            /*
-            * PLAYER EVENT HANDLING
-            */
-            const eventFiles = fs.readdirSync("./events/voice").filter(file => file.endsWith(".js"));
-
-            for (const file of eventFiles) {
-                const event = require(`../events/voice/${file}`);
-
-                event.textChannel = this.textChannel;
-                event.voiceChannel = this.voiceChannel;
-
-                if (event.once) {
-                    this.player.once(event.name, (...args) => event.execute(...args));
-                } else {
-                    this.player.on(event.name, (...args) => event.execute(...args));
-                }
-            }
         }
 
         const audioResourceOptions = {inlineVolume: true};
@@ -215,6 +233,7 @@ class ServerQueue {
 
     leave() {
         this.player.stop();
+        this.connection.destroy();
     }
 }
 
