@@ -15,8 +15,8 @@ module.exports = {
             return await interaction.reply("You must be in a voice channel for me to work!");
         }
 
-        let speechPermission = voiceChannel.speakable
-        let joinPermission = voiceChannel.joinable
+        let speechPermission = voiceChannel.speakable;
+        let joinPermission = voiceChannel.joinable;
         
         // Check if the client can join and speak in the channel
         if (!joinPermission) {

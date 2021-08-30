@@ -1,13 +1,13 @@
 const DiscordVoice = require("@discordjs/voice");
 const ytdl = require("ytdl-core");
 const fs = require("fs");
-const { runInThisContext } = require("vm");
+const Config = require("../config.json");
 
 
 class ServerQueue {
 
     constructor(textChannel, voiceChannel) {
-        this.volume = 50;
+        this.volume = Config.defaultVolume;
         this.textChannel = textChannel;
         this.voiceChannel = voiceChannel;
         this.songQueue = [];
@@ -16,6 +16,7 @@ class ServerQueue {
         this.fairplay = false;
         this.autoplay = false;
         this.notification = true;
+        this.resource = null;
         this.player = null;
         this.nextInsertIterator = 0;
     }
@@ -75,8 +76,9 @@ class ServerQueue {
 
         const audioResourceOptions = {inlineVolume: true};
         const ytdlOptions = {filter: "audioonly", quality: "lowestaudio", highWaterMark: 1024 * 1024 * 10 * 10, bitrate: 96000};
-        const resource = DiscordVoice.createAudioResource(ytdl(this.currentlyPlayingSong.url, ytdlOptions), audioResourceOptions);
-        this.player.play(resource);
+        this.resource = DiscordVoice.createAudioResource(ytdl(this.currentlyPlayingSong.url, ytdlOptions), audioResourceOptions);
+        this.resource.volume.setVolume(this.volume / 100);
+        this.player.play(this.resource);
         this.connection.subscribe(this.player);
     }
 
@@ -171,7 +173,8 @@ class ServerQueue {
     }
 
     setVolume(amount) {
-
+        this.volume = amount;
+        this.resource.volume.setVolume(this.volume / 100);
     }
 
     skipTo(songPosition) {
@@ -185,8 +188,9 @@ class ServerQueue {
 
         const audioResourceOptions = {inlineVolume: true};
         const ytdlOptions = {filter: "audioonly", quality: "lowestaudio", highWaterMark: 1024 * 1024 * 10 * 10, bitrate: 96000};
-        const resource = DiscordVoice.createAudioResource(ytdl(this.currentlyPlayingSong.url, ytdlOptions), audioResourceOptions);
-        this.player.play(resource);
+        this.resource = DiscordVoice.createAudioResource(ytdl(this.currentlyPlayingSong.url, ytdlOptions), audioResourceOptions);
+        this.resource.volume.setVolume(this.volume / 100);
+        this.player.play(this.resource);
         this.connection.subscribe(this.player);
     }
 

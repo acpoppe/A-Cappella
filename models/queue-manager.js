@@ -54,6 +54,11 @@ class PrivateQueueManager {
 
     }
 
+    setVolume(serverId, textChannel, voiceChannel, volumeAmount) {
+        const queue = this.getQueue(serverId, textChannel, voiceChannel);
+        queue.setVolume(volumeAmount);
+    }
+
     skipTo(serverId, textChannel, voiceChannel, songPosition) {
         const queue = this.getQueue(serverId, textChannel, voiceChannel);
         queue.skipTo(songPosition);
@@ -151,6 +156,14 @@ class PrivateQueueManager {
     getNotificationIsOn(serverId) {
         if (this.queues.has(serverId)) {
             return this.queues.get(serverId).notification;
+        } else {
+            return false;
+        }
+    }
+
+    getVolume(serverId) {
+        if (this.queues.has(serverId)) {
+            return this.queues.get(serverId).volume;
         } else {
             return false;
         }
