@@ -3,6 +3,7 @@ const Song = require("../models/song.js");
 const QueueManager = require("../models/queue-manager.js");
 const ytdl = require("ytdl-core");
 const ytsr = require("ytsr");
+const ytpl = require("ytpl");
 
 module.exports = {
     data: new SlashCommandBuilder().setName("playnow").setDescription("Plays song. If one is already playing, it ends immediately").addStringOption(option =>
@@ -38,17 +39,9 @@ module.exports = {
             name = interaction.member.nickname;
         }
 
-        let playlistId = false;
         let possibleURL = interaction.options.getString("input");
-        
-        // var regExp = /^.*(youtu.be\/|list=)([^#\&\?]*).*/;
-        var regExp = /^.*(list=)([^#\&\?]*).*/;
-        var match = possibleURL.match(regExp);
-        if (match && match[2]){
-            playlistId = match[2];
-        }
 
-        if (!playlistId) {
+        if (!ytpl.validateID(possibleURL)) {
             const validURL = await ytdl.validateURL(interaction.options.getString("input"));
             if (validURL) {
                 let song = new Song(interaction.options.getString("input"), interaction.member.id, name);
@@ -82,7 +75,7 @@ module.exports = {
                 }
             }
         } else {
-            return await interaction.followUp({content: "Is a playlist"});
+            return await interaction.followUp({content: "Playlist ID is valid"});
         }
     }
 };

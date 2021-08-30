@@ -28,8 +28,7 @@ module.exports = {
         QueueManager.getInstance().clearQueue(interaction.guildId,
             interaction.channel,
             voiceChannel);
-
-        console.log(JSON.stringify(QueueManager.getInstance().queues.get(interaction.guildId).songQueue));
+        
         await interaction.followUp({content: "Queue cleared!"});
     }
 };

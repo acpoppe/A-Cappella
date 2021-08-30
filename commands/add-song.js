@@ -3,6 +3,7 @@ const Song = require("../models/song.js");
 const QueueManager = require("../models/queue-manager.js");
 const ytdl = require("ytdl-core");
 const ytsr = require("ytsr");
+const ytpl = require("ytpl");
 
 module.exports = {
     data: new SlashCommandBuilder().setName("addsong").setDescription("Adds song to the end of the queue").addStringOption(option =>
@@ -38,17 +39,9 @@ module.exports = {
             name = interaction.member.nickname;
         }
         
-        let playlistId = false;
         let possibleURL = interaction.options.getString("input");
-        
-        // var regExp = /^.*(youtu.be\/|list=)([^#\&\?]*).*/;
-        var regExp = /^.*(list=)([^#\&\?]*).*/;
-        var match = possibleURL.match(regExp);
-        if (match && match[2]){
-            playlistId = match[2];
-        }
 
-        if (!playlistId) {
+        if (!ytpl.validateID(possibleURL)) {
             const validURL = await ytdl.validateURL(interaction.options.getString("input"));
             if (validURL) {
                 let song = new Song(interaction.options.getString("input"), interaction.member.id, name);
@@ -82,7 +75,19 @@ module.exports = {
                 }
             }
         } else {
-            return await interaction.followUp({content: "Is a playlist"});
+            ytplOptions = {limit: Infinity};
+            await interaction.followUp({content: "Starting to add songs from playlist " + playlistResults.title + ".  This may take a minute"})
+            const playlistResults = await ytpl(possibleURL, ytplOptions);
+            for (let i = 0; i < playlistResults.items.length; i++) {
+                let song = new Song(playlistResults.items[i].shortUrl, interaction.member.id, name);
+                await song.getSongInfo();
+                        
+                QueueManager.getInstance().addSongToEndOfQueue(song,
+                    interaction.guildId,
+                    interaction.channel,
+                    voiceChannel);
+            }
+            return await interaction.followUp({content: "I'm done adding songs from playlist " + playlistResults.title});
         }
     }
 };
