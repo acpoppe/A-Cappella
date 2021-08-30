@@ -41,10 +41,10 @@
   <p align="center">
     A music bot for Discord!
     <br />
-    <a href="https://github.com/acpoppe/A-Cappella"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/acpoppe/A-Cappella"><strong>Explore the docs » (Someday)</strong></a>
     <br />
     <br />
-    <a href="https://github.com/acpoppe/A-Cappella">View Demo</a>
+    <a href="https://github.com/acpoppe/A-Cappella">View Demo (Someday)</a>
     ·
     <a href="https://github.com/acpoppe/A-Cappella/issues">Report Bug</a>
     ·
@@ -104,9 +104,8 @@ A music bot for Discord!
 To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+* [node](https://nodejs.org/en/download/package-manager/)
+* [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
   ```sh
   npm install npm@latest -g
   ```
@@ -117,13 +116,13 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    git clone https://github.com/acpoppe/A-Cappella.git
    ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-3. Navigate to the app directory
+2. Navigate to the app directory
    ```sh
    cd /PATH_TO_DIRECTORY/acappella
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
    ```
 4. Rename configTemplate.json to config.json
    ```sh
