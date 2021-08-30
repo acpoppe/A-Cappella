@@ -170,7 +170,7 @@ Contributions are what make the open source community such an amazing place to l
 <!-- LICENSE -->
 ## License
 
-This application is currently UNLICENSED.
+Distributed under the MIT License. See LICENSE for more information.
 
 
 
@@ -203,6 +203,6 @@ Project Link: [https://github.com/acpoppe/A-Cappella](https://github.com/acpoppe
 [issues-shield]: https://img.shields.io/github/issues/acpoppe/A-Cappella.svg?style=for-the-badge
 [issues-url]: https://github.com/acpoppe/A-Cappella/issues
 [license-shield]: https://img.shields.io/github/license/acpoppe/A-Cappella.svg?style=for-the-badge
-[license-url]: https://github.com/acpoppe/A-Cappella/blob/master/LICENSE.txt
+[license-url]: https://github.com/acpoppe/A-Cappella/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/allison-poppe-2426a7193
