@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-As of now, A-Cappella doesn't have any official versioning and is really more of a prototype.
+As of now, A Cappella doesn't have any official versioning and is really more of a prototype.
 
 <!--- Use this section to tell people about which versions of your project are
 currently being supported with security updates.
