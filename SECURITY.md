@@ -16,7 +16,7 @@ currently being supported with security updates.
 
 ## Reporting a Vulnerability
 
-To report a vulnerability, please email me at allisonpoppe89@gmail.com or tweet me @alliepoppe
+To report a vulnerability, please email me at allisonpoppe89@gmail.com or DM me on Twitter @alliepoppe
 with as much detail as possible.
 
 If a vulnerability that threatens users is reported, an issue will be made as soon as possible
