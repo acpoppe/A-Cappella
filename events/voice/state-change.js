@@ -13,10 +13,10 @@ module.exports = {
                 if (song !== null) {
                     const playingEmbed = new Discord.MessageEmbed()
                     .setColor("#0099FF")
-                    .setAuthor("STARTING SONG - A Cappella", "https://allisonpoppe.com/acappella/images/logo.jpeg")
-                    .setThumbnail("https://allisonpoppe.com/acappella/images/logo.jpeg")
+                    .setAuthor("STARTING SONG - A Cappella", "https://allisonpoppe.com/acappella/images/logo.png")
+                    .setThumbnail("https://allisonpoppe.com/acappella/images/logo.png")
                     .setTimestamp()
-                    .setFooter("by Allison Poppe", "https://allisonpoppe.com/acappella/images/logo.jpeg");
+                    .setFooter("by Allison Poppe", "https://allisonpoppe.com/acappella/images/logo.png");
 
                     let currentLength = new Date(song.length * 1000).toISOString().substr(11, 8);
                     playingEmbed.addField("\u200B", "\u200B");

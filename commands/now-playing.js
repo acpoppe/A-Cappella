@@ -11,10 +11,10 @@ module.exports = {
                 let currentSong = QueueManager.getInstance().queues.get(interaction.guildId).currentlyPlayingSong;
                 const embed = new Discord.MessageEmbed()
                     .setColor("#0099FF")
-                    .setAuthor("NOW PLAYING - A Cappella", "https://allisonpoppe.com/acappella/images/logo.jpeg")
-                    .setThumbnail("https://allisonpoppe.com/acappella/images/logo.jpeg")
+                    .setAuthor("NOW PLAYING - A Cappella", "https://allisonpoppe.com/acappella/images/logo.png")
+                    .setThumbnail("https://allisonpoppe.com/acappella/images/logo.png")
                     .setTimestamp()
-                    .setFooter("by Allison Poppe", "https://allisonpoppe.com/acappella/images/logo.jpeg");
+                    .setFooter("by Allison Poppe", "https://allisonpoppe.com/acappella/images/logo.png");
 
                 if (currentSong) {
                     let currentLength = new Date(currentSong.length * 1000).toISOString().substr(11, 8);

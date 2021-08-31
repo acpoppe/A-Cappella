@@ -22,8 +22,8 @@ module.exports = {
             for (let i = 0; i < pages; i++) {
                 const embed = new Discord.MessageEmbed()
                     .setColor("#0099FF")
-                    .setAuthor("QUEUE - A Cappella", "https://allisonpoppe.com/acappella/images/logo.jpeg")
-                    .setThumbnail("https://allisonpoppe.com/acappella/images/logo.jpeg")
+                    .setAuthor("QUEUE - A Cappella", "https://allisonpoppe.com/acappella/images/logo.png")
+                    .setThumbnail("https://allisonpoppe.com/acappella/images/logo.png")
                     .setTimestamp();
 
                 if (i === 0) {
