@@ -132,15 +132,19 @@ class PrivateQueueManager {
         if (this.queues.has(serverId)) {
             const queue = this.queues.get(serverId);
             queue.textChannel = textChannel;
-            if (queue.connection !== null && queue.voiceChannel !== voiceChannel) {
-                queue.voiceChannel = voiceChannel;
-                this.join(serverId, textChannel, voiceChannel);
-            } else {
-                queue.voiceChannel = voiceChannel;
-            }
+            queue.voiceChannel = voiceChannel;
+            // if (queue.connection !== null && queue.voiceChannel !== voiceChannel) {
+            //     queue.voiceChannel = voiceChannel;
+            //     this.join(serverId, textChannel, voiceChannel);
+            // } else {
+            //     queue.voiceChannel = voiceChannel;
+            // }
+            // return queue;
+            queue.joinVoiceChannel();
             return queue;
         } else {
             this.queues.set(serverId, new ServerQueue(textChannel, voiceChannel));
+            this.queues.get(serverId).joinVoiceChannel();
             return this.queues.get(serverId);
         }
     }
