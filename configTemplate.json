@@ -5,5 +5,5 @@
     "clientId": "our client ID For Production Bot",
     "devClientId": "Your client ID For Dev Bot",
     "devMode": true,
-    "defaultVolume": 50
+    "defaultVolume": 25
 }

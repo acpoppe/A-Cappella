@@ -33,7 +33,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/acpoppe/A-Cappella">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://allisonpoppe.com/acappella/images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">A Cappella</h3>
@@ -85,7 +85,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[<img src="images/logo.png" alt="Logo" width="80" height="80">](https://allisonpoppe.com)
+[<img src="https://allisonpoppe.com/acappella/images/logo.png" alt="Logo" width="80" height="80">](https://allisonpoppe.com)
 
 A music bot for Discord!
 
