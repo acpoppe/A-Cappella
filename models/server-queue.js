@@ -240,6 +240,7 @@ class ServerQueue {
 
     leave() {
         this.player.stop();
+        this.connection.disconnect();
         this.connection.destroy();
     }
 }
