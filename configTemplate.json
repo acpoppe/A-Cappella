@@ -5,5 +5,8 @@
     "clientId": "our client ID For Production Bot",
     "devClientId": "Your client ID For Dev Bot",
     "devMode": true,
-    "defaultVolume": 25
+    "defaultVolume": 25,
+    "useSpotify": true,
+    "spotifyClientId": "Your Spotify client id",
+    "spotifyClientSecret": "Your Spotify client secret"
 }
